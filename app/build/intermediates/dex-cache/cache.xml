@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-958fffd8a1519d0a88bd1aafb15d9446de840864.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a08d65794b844d8e7540bf9a33859bf3b2482d7f">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-d6eaf0a80db642b4114d69afaf74501398149ad2.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7ff613bf78ab057293892fdbd4169eda899c89b9">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-6b994268482a9c34a0d7d998b7772e8bc28a19aa.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-3412e1481fad95863adb817973e2215f94c4727f.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4c93d99d454c975536bbe3b42283eee847f03ea3">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-7d70277ab449212dfae5949620cfb73801948e95.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c976518693e89ad44fbfccfc654941eaec198d08">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-e8eb6d6a02cabcea4d3d2f18264c4662337a1fc0.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="73ccb92b70112f2e463e415ef8d7275de7da6516">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-52a67cfbd4a9fed12b6b60f83378744168b71551.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ef5f051e7308febe289dc93c67c5f32785b4260a">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-dba6171297ea9c9bdd339b2e3e87f293e1f83d5c.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-ad8836ab8375fe347f301a13c630b7495c45c564.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="41b3870cbe5fa546d8095b5b89d42cb69f3dd175">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-a62e23b6f5de55c04c8795e9f1d20d48af00f626.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4cd0b093824b3228fffc21ea369b98d0b1db6566">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-dead7ec2a2d75a8f2f5098d0791f52098785b483.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e3d791b42eaa90416cd0b2d2e608092794a3baa4">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-bc648af82152c13caac73cba5549c8972d5d2bfb.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="fb04b12526b0073c7fb1ebb70c5842d82ee95596">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-099292cda2324c974d45a2137b92b08951da4bd0.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a96b762bde4139de855735f175ec4d17dca55a6d">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-c3ec9062fcc988d7be9613816ad95d46eaae6ee6.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3033cc3a2c68dff3e5b646d6d084bdbdf7d00b25">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-301e135200d213c40a329d240eacdcab7cd964e6.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c6d79137693d494dee16372d3921f919eb724ced">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-23963d095bcd13987baa6d12bd6889f35965ac77.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-adf3787bdfa1c642a64b4cd25fd9f44252057272.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="17f8750d5c0749e44dd7c54aa390d9c937803825">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-7223f6dcc8440435233a5f4f141b45da6c0eb547.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="29fd6d3794b71491c2789708cd8d03c71feb8954">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-145624196d48ad97da1a15de8a8657b023c80d9c.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9224bc4c54ba95147c7eabd874573763c07cb6be">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-11b844ecf929ff6f5c1ba4864ebf7b49808448aa.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1c5a76debf0c2857ccad422c4a80ed785982f8df">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-500403647dae6b75dc30f9b709cbe29e5f5caf40.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="055783146ba9654a725442563be78cad303aad1f">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-e8e5cef35fbd0cf1709d24629d8fa511a04071dc.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0e8228b4bc69c6a2c8d7c18498a77e53417d2574">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-4ed53cc3b92337b4138b412c83035a44ecec2ed1.jar" />
+    </item>
+    <item
+        jar="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3c0b099f9de16b265ecd6122fcb603e7d0d29f90">
+        <dex dex="/home/diwakar/bin/AndroidStudioProjects/Attendance/app/build/intermediates/pre-dexed/debug/classes-2b407859d4538a35bb9f0bc257b22d43dfcaf992.jar" />
+    </item>
+
+</items>

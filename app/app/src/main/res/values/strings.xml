@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">DTU Attendance</string>
+
+    <!-- Strings related to login -->
+    <string name="title_activity_authenticate">Sign in</string>
+    <string name="prompt_username">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Click to Sign In</string>
+    <string name="action_sign_in_short">Sign in</string>
+
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_username_password_combo">Wrong username:password combination</string>
+    <string name="error_field_required">This field is required</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="upload_url">http://192.168.1.101/attendance/index.php</string>
+    <string name="authenticate_url">http://192.168.1.101/attendance/authenticate.php</string>
+    <string name="title_activity_select_subject_class">Select_subject_class</string>
+
+</resources>
