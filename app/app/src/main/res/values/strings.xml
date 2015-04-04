@@ -15,8 +15,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="upload_url">http://192.168.1.101/attendance/index.php</string>
-    <string name="authenticate_url">http://192.168.1.101/attendance/authenticate.php</string>
+    <string name="upload_url">http://192.168.1.100/attendance/index.php</string>
+    <string name="authenticate_url">http://192.168.1.100/attendance/authenticate.php</string>
     <string name="title_activity_select_subject_class">Select_subject_class</string>
+    <string name="title_activity_count_down">CountDown</string>
 
 </resources>

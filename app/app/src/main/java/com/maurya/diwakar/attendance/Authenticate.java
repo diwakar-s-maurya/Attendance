@@ -12,6 +12,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -33,7 +34,7 @@ import java.util.HashMap;
 /**
  * A login screen that offers login via email/password.
  */
-public class Authenticate extends Activity {
+public class Authenticate extends ActionBarActivity {
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
