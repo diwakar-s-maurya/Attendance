@@ -8,5 +8,5 @@ import org.json.JSONArray;
 public class ServerReplyData {
     JSONArray jsonArray;
     int httpStatusCode = -1;
-    String exceptionMessage = new String();
+    String exceptionMessage = "";
 }

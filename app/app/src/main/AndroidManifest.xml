@@ -28,6 +28,10 @@
             android:name=".CountDown"
             android:label="@string/title_activity_count_down" >
         </activity>
+        <activity
+            android:name=".Final_edits"
+            android:label="@string/title_activity_final_edits" >
+        </activity>
     </application>
 
 </manifest>

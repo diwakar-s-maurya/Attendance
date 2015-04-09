@@ -1,23 +1,41 @@
 package com.maurya.diwakar.attendance;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Vibrator;
+import android.support.v4.view.GestureDetectorCompat;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
 public class CountDown extends Activity {
 
-    List<String> roll_list;
+    ArrayList<String> roll_list;
     String mUsername;
     String subject_name;
     String class_name;
-    String value;
+    int value;
+
+    private GestureDetectorCompat mDetector;
+    TextView rollNoTextView;
+    int students;
+    boolean[] attRecord;
+    int currentRollNo = 1;
+    Vibrator vibrator;
+    private Toast toast;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +45,49 @@ public class CountDown extends Activity {
         mUsername = getIntent().getStringExtra("username");
         subject_name = getIntent().getStringExtra("subject");
         class_name = getIntent().getStringExtra("class");
-        value = getIntent().getStringExtra("value");
+        value = getIntent().getIntExtra("value", -1);
+        students = roll_list.size();
+        attRecord = new boolean[students];
+
+        ((TextView) findViewById(R.id.subject_text)).setText(getIntent().getStringExtra("subject"));
+        ((TextView) findViewById(R.id.class_text)).setText(getIntent().getStringExtra("class"));
+        rollNoTextView = (TextView) findViewById(R.id.rollNo);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setProgress(0);
+        progressBar.setMax(students);
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        toast = Toast.makeText(getApplicationContext(), currentRollNo + " Present", Toast.LENGTH_SHORT);
+        mDetector = new GestureDetectorCompat(this, new MyGestureListener());
+
+        ((Button) findViewById(R.id.cancel)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        ((Button) findViewById(R.id.done)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent finalEditsActivity = new Intent(CountDown.this, Final_edits.class);
+                finalEditsActivity.putExtra("roll_list", roll_list);
+                finalEditsActivity.putExtra("attRecord", attRecord);
+                finalEditsActivity.putExtra("subject_name", subject_name);
+                finalEditsActivity.putExtra("class_name", class_name);
+                finalEditsActivity.putExtra("value", value);
+                startActivity(finalEditsActivity);
+                finish();
+            }
+        });
+    }
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        if(this.mDetector != null)
+            this.mDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
     }
 
     @Override
@@ -50,5 +110,62 @@ public class CountDown extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent event) {
+            attRecord[currentRollNo-1] = true;
+            if(toast != null)
+                toast.cancel();
+            toast.setText(currentRollNo + " Present");
+            //todo: toast not getting shown in 4.x
+            toast.show();//http://www.putlocker.ms/star-trek-into-darkness-full-movie-watch-online-free.html
+            progressBar.setProgress(currentRollNo);
+            ++currentRollNo;
+            rollNoTextView.setText(String.valueOf(currentRollNo));
+            if(currentRollNo%10 == 1)
+                vibrator.vibrate(200);
+            else
+                vibrator.vibrate(100);
+            if(currentRollNo == students+1)
+            {
+                ((Button)findViewById(R.id.done)).setEnabled(true);
+                rollNoTextView.setText("Complete");
+                rollNoTextView.setTextSize(50);
+                mDetector = null;
+            }
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent event1, MotionEvent event2,
+                               float velocityX, float velocityY) {
+
+            if(Math.abs(event1.getX() - event2.getX()) < 75)
+                return false;
+
+            attRecord[currentRollNo-1] = false;
+            if(toast != null)
+                toast.cancel();
+            toast.setText(currentRollNo + " Absent");
+            toast.show();
+            progressBar.setProgress(currentRollNo);
+            ++currentRollNo;
+            rollNoTextView.setText(String.valueOf(currentRollNo));
+            if(currentRollNo%10 == 1)
+                vibrator.vibrate(200);
+            else
+                vibrator.vibrate(100);
+            if(currentRollNo == students+1)
+            {
+                ((Button)findViewById(R.id.done)).setEnabled(true);
+                rollNoTextView.setText("Complete");
+                rollNoTextView.setTextSize(50);
+                mDetector = null;
+            }
+            return true;
+        }
     }
 }

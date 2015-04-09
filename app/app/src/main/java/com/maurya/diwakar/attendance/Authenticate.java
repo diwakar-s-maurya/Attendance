@@ -3,12 +3,8 @@ package com.maurya.diwakar.attendance;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,7 +13,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -41,7 +36,7 @@ public class Authenticate extends ActionBarActivity {
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private EditText mEmailView;
+    private EditText mUsernameView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -52,14 +47,14 @@ public class Authenticate extends ActionBarActivity {
         setContentView(R.layout.activity_authenticate);
 
         // Set up the login form.
-        mEmailView = (EditText) findViewById(R.id.username);
+        mUsernameView = (EditText) findViewById(R.id.username);
         //populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                if (id == R.id.username) {
                     attemptLogin();
                     return true;
                 }
@@ -90,16 +85,16 @@ public class Authenticate extends ActionBarActivity {
         }
 
         // Reset errors.
-        mEmailView.setError(null);
+        mUsernameView.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
+        String email = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         if (email.isEmpty()) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            mEmailView.requestFocus();
+            mUsernameView.setError(getString(R.string.error_field_required));
+            mUsernameView.requestFocus();
             return;
         }
         if (password.isEmpty()) {
@@ -108,8 +103,9 @@ public class Authenticate extends ActionBarActivity {
             return;
         }
 
-        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+/*        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo[] info = connectivityManager.getAllNetworkInfo();
+        //todo: not connecting to usb tethering, fix it
         boolean isConnected = false;
         for (int i = 0; i < info.length; ++i)
             if (info[i].isConnected()) {
@@ -118,8 +114,8 @@ public class Authenticate extends ActionBarActivity {
             }
         if (!isConnected) {
             Toast.makeText(Authenticate.this, "Not Connected to any network", Toast.LENGTH_SHORT).show();
-            //return;
-        }
+            return;
+        }*/
 
         // Show a progress spinner, and kick off a background task to
         // perform the user login attempt.
@@ -187,7 +183,7 @@ public class Authenticate extends ActionBarActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+
             ContentValues paramValues = new ContentValues();
             paramValues.put("username", mUsername);
             paramValues.put("password", mPassword);
@@ -219,8 +215,6 @@ public class Authenticate extends ActionBarActivity {
                 e.printStackTrace();
                 return false;
             }
-
-            // TODO: register the new account here.
             return true;
         }
 
@@ -235,13 +229,13 @@ public class Authenticate extends ActionBarActivity {
                     Toast.makeText(getApplicationContext(), "Error in communicating with server: " + serverReplyData.httpStatusCode, Toast.LENGTH_LONG).show();
             } else if (querySuccess == 1) {
                 super.onPostExecute(success);
+                finish();
                 Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Authenticate.this, Select_subject_class.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("class_subject_roll_map", class_subject_roll_map);
                 intent.putExtra("username", mUsername);
-                getApplicationContext().startActivity(intent);
-                finish();
+                Authenticate.this.startActivity(intent);
                 return;
             } else if (querySuccess == 2) {
                 Toast.makeText(getApplicationContext(), "Wrong username/password combination", Toast.LENGTH_SHORT).show();

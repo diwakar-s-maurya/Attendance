@@ -6,7 +6,6 @@ package com.maurya.diwakar.attendance;
 import android.content.ContentValues;
 import android.util.Log;
 
-import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -30,9 +29,9 @@ import java.util.Set;
  */
 public class JSONParser {
 
-    static InputStream is = null;
-    static JSONArray jsonArray = null;
-    static String json = "";
+    InputStream is = null;
+    JSONArray jsonArray = null;
+    String json = "";
 
     // constructor
     public JSONParser() {
@@ -70,21 +69,19 @@ public class JSONParser {
                     is = conn.getInputStream();
                 } else {
                     //Todo: add some error handling if any
-                    //failed
+                    return serverReplyData;
                 }
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             if (serverReplyData.exceptionMessage.isEmpty())
                 serverReplyData.exceptionMessage = e.getMessage();
-        } catch (ClientProtocolException e) {//todo: remove it
-            e.printStackTrace();
-            if (serverReplyData.exceptionMessage.isEmpty())
-                serverReplyData.exceptionMessage = e.getMessage();
+            return serverReplyData;
         } catch (IOException e) {
             e.printStackTrace();
             if (serverReplyData.exceptionMessage.isEmpty())
                 serverReplyData.exceptionMessage = e.getMessage();
+                return serverReplyData;
         }
 
         try {
@@ -101,6 +98,7 @@ public class JSONParser {
             Log.e("Buffer Error", "Error converting result " + e.toString());
             if (serverReplyData.exceptionMessage.isEmpty())
                 serverReplyData.exceptionMessage = e.getMessage();
+            return serverReplyData;
         }
 
         // try parse the string to a JSON object
@@ -110,6 +108,7 @@ public class JSONParser {
             Log.e("JSON Parser", "Error parsing class_subject_roll_map " + e.toString());
             if (serverReplyData.exceptionMessage.isEmpty())
                 serverReplyData.exceptionMessage = e.getMessage();
+            return serverReplyData;
         }
 
         serverReplyData.jsonArray = jsonArray;
