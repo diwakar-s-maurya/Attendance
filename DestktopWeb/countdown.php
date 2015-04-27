@@ -19,6 +19,13 @@ if( ! isset($_POST['class_name']) || ! isset($_POST['subject_name']) || !isset($
     die();
 }
 
+if($_POST['buttonClicked'] == "Logout"){
+    require_once 'utilities.php';
+    destroySession();
+    header("Location: attendance.php");
+    die();
+}
+
 require_once("loginSQLfile.php");
 try{
 $STH = $DBH->prepare("SELECT student FROM class_student WHERE class = :class");

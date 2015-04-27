@@ -37,7 +37,7 @@
                 android:hint="@string/prompt_username"
                 android:inputType="text"
                 android:maxLines="1"
-                android:text="vinod"
+                android:text="diwakar"
                 android:singleLine="true"
                 android:gravity="center"/>
 
@@ -50,7 +50,7 @@
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:text="vinod"
+                android:text="diwakar"
                 android:singleLine="true"
                 android:gravity="center"/>
 

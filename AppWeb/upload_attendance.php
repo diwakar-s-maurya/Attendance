@@ -32,5 +32,7 @@ try{
 	file_put_contents('PDOErrors.txt', $e->getMessage(), FILE_APPEND);
 }
 	
-	echo json_encode(array(array("success"=> $success)));
+	$data = array();
+	$data['success'] = $success;
+	echo json_encode($data);
 ?>

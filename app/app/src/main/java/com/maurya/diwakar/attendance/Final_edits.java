@@ -1,5 +1,8 @@
 package com.maurya.diwakar.attendance;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.LauncherActivity;
 import android.content.ContentValues;
@@ -8,9 +11,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.internal.view.menu.ListMenuItemView;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -38,20 +43,26 @@ import java.util.List;
 public class Final_edits extends ActionBarActivity {
 
     ArrayList<String> roll_list;
-    private List<FeedItem> feedItemList;
     boolean[] attRecord;
     String subject_name;
     String class_name;
     int value;
+    private UploadData mUploadTask = null;
+    View mLoginFormView;
+    View mProgressView;
+
+    private List<FeedItem> feedItemList;
     private RecyclerView mRecyclerView;
     private MyRecyclerAdapter adapter;
-    private UploadData mUploadTask = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_edits);
+        mLoginFormView = findViewById(R.id.final_edits_form);
+        mProgressView = findViewById(R.id.upload_progress);
+
         roll_list = getIntent().getStringArrayListExtra("roll_list");
         attRecord = getIntent().getBooleanArrayExtra("attRecord");
         subject_name = getIntent().getStringExtra("subject_name");
@@ -65,7 +76,10 @@ public class Final_edits extends ActionBarActivity {
         /* Initialize recycler view */
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MyRecyclerAdapter(Final_edits.this, feedItemList);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        adapter = new MyRecyclerAdapter(Final_edits.this, feedItemList, ((TextView)findViewById(R.id.brief_info)));
         mRecyclerView.setAdapter(adapter);
 
         findViewById(R.id.cancel).setOnClickListener(new View.OnClickListener() {
@@ -94,6 +108,7 @@ public class Final_edits extends ActionBarActivity {
                             @Override
                             public void onClick(DialogInterface dialog,
                                                 int which) {
+                                showProgress(true);
                                 mUploadTask = new UploadData();
                                 mUploadTask.execute((Void) null);
                             }
@@ -132,6 +147,42 @@ public class Final_edits extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    public void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
+    }
+
     public class UploadData extends AsyncTask<Void, Integer, Boolean> {
 
         ServerReplyData serverReplyData;
@@ -140,14 +191,14 @@ public class Final_edits extends ActionBarActivity {
         }
 
         protected void onProgressUpdate(Integer... progress) {
-            //show some progress
+            ((ProgressBar) findViewById(R.id.upload_progress)).setProgress(progress[0]);
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             String rawData = "";
             for(int i = 0; i<roll_list.size(); ++i)
-                rawData += attRecord[i] ? '1' : '0';
+                rawData += feedItemList.get(i).myAttRecord ? '1' : '0';
             ContentValues paramValues = new ContentValues();
             paramValues.put("attRecord", rawData);
             paramValues.put("value", String.valueOf(value));
@@ -156,13 +207,13 @@ public class Final_edits extends ActionBarActivity {
 
             String url_upload = getResources().getString(R.string.upload_url);
             serverReplyData = (new JSONParser()).makeHttpRequest(url_upload, "POST", paramValues);
-            JSONArray json = serverReplyData.jsonArray;
+            JSONObject json = serverReplyData.jsonObject;
             if (serverReplyData.httpStatusCode != 200)
                 return false;
             //publishProgress(50);
             // check for querySuccess tag
             try {
-                int success = ((JSONObject)json.get(0)).getInt("success");
+                int success = json.getInt("success");
             } catch (Exception e) {
                 e.printStackTrace();
                 return false;
@@ -173,13 +224,15 @@ public class Final_edits extends ActionBarActivity {
         @Override
         protected void onPostExecute(final Boolean success) {
             mUploadTask = null;
+            showProgress(false);
             if (serverReplyData.httpStatusCode != 200) {
                 if (serverReplyData.httpStatusCode == -1)
                     Toast.makeText(getApplicationContext(), "Exception occurred: " + serverReplyData.exceptionMessage, Toast.LENGTH_LONG).show();
                 else
-                    Toast.makeText(getApplicationContext(), "Error in communicating with server: " + serverReplyData.httpStatusCode, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Error in communication with server: " + serverReplyData.httpStatusCode, Toast.LENGTH_LONG).show();
             } else if (success) {
                 Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_SHORT).show();
+                finish();
             }else {
                 Toast.makeText(Final_edits.this, "Not successful", Toast.LENGTH_SHORT).show();
             }
@@ -188,6 +241,7 @@ public class Final_edits extends ActionBarActivity {
         @Override
         protected void onCancelled() {
             mUploadTask = null;
+            showProgress(false);
         }
     }
 }

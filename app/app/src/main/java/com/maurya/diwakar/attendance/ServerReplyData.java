@@ -1,12 +1,12 @@
 package com.maurya.diwakar.attendance;
 
-import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * Created by diwakar on 4/3/15.
  */
 public class ServerReplyData {
-    JSONArray jsonArray;
+    JSONObject jsonObject;
     int httpStatusCode = -1;
     String exceptionMessage = "";
 }

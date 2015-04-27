@@ -11,7 +11,7 @@ try{
 	header('Content-Type: text/html; charset=utf-8');
 }catch(PDOException $ex) 
 {
-		die("Failed to connect to the database: " . $ex->getMessage());
+	die("Failed to connect to the database: " . $ex->getMessage());
 }
 
 ?>

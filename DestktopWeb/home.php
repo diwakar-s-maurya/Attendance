@@ -29,7 +29,7 @@ try{
 			
 	$STH2->execute();
 	$STH3 = $DBH->prepare("SELECT student FROM class_student WHERE class = :class");
-		
+
 	$class_subject = array();
 	while($row = $STH2->fetch(PDO::FETCH_ASSOC))
 	{
@@ -57,7 +57,7 @@ try{
 }
 
 $data['success'] = 0;
-echo json_encode($data);
+//echo json_encode($data);
 ?>
 
 <script>
@@ -112,11 +112,11 @@ function loadSubjectSelect() {
 };
 function validateForm(){
 	if(document.getElementById("classSelect").selectedIndex === 0){
-		alert("Select a class");
+		window.alert("Select a class");
 		return false;
 	}
 	if(document.getElementById("subjectSelect").selectedIndex === 0){
-		alert("Select a subject");
+		window.alert("Select a subject");
 		return false;
 	}
 	return true;
@@ -159,11 +159,14 @@ include("header.html");
       </div>
       <div class="row">
         <div class="large-6 columns">
-          <button type="submit" class="button round" onsubmit="return validateForm()">Start</button>
+	    <input type="submit" class="button round" name="buttonClicked" value="Start" onclick="return validateForm()">
+        </div>
+	<div class="large-6 columns">
+	    <input type="submit" class="button round alert-dark" name="buttonClicked" value="Logout"><!--todo: logout button works only when class is selected-->
         </div>
       </div>
     </fieldset>
-  </form>
+  </form>  
 </div>
 <?php
 include("footer.html");

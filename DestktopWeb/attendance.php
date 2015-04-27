@@ -22,10 +22,10 @@ if( !empty($_POST['username']) && !empty($_POST['password'])){
 		if($STH->execute() && $STH->rowCount() == 1){ //if row count > 1 it may be because of sql injection
 			$result = $STH->fetch(PDO::FETCH_ASSOC);
 			$temp = encryptPassword($password, $result['password_salt']);
-			print($temp); echo "<br>";
 			
 			if($result['password_hash'] == $temp){
 				//authenticated
+				session_regenerate_id(true);
 				session_start();
 				$_SESSION['username'] = $username;
 				header("Location: home.php");

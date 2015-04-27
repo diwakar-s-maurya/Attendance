@@ -6,8 +6,8 @@ package com.maurya.diwakar.attendance;
 import android.content.ContentValues;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -30,7 +30,7 @@ import java.util.Set;
 public class JSONParser {
 
     InputStream is = null;
-    JSONArray jsonArray = null;
+    JSONObject jsonObject = null;
     String json = "";
 
     // constructor
@@ -103,7 +103,7 @@ public class JSONParser {
 
         // try parse the string to a JSON object
         try {
-            jsonArray = new JSONArray(json);
+            jsonObject = new JSONObject(json);
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing class_subject_roll_map " + e.toString());
             if (serverReplyData.exceptionMessage.isEmpty())
@@ -111,7 +111,7 @@ public class JSONParser {
             return serverReplyData;
         }
 
-        serverReplyData.jsonArray = jsonArray;
+        serverReplyData.jsonObject = jsonObject;
         return serverReplyData;
     }
 

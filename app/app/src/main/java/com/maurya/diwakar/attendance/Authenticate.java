@@ -24,6 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -169,7 +170,7 @@ public class Authenticate extends ActionBarActivity {
         private final String mUsername;
         private final String mPassword;
         ServerReplyData serverReplyData;
-        HashMap<mPair<String, String>, ArrayList<String>> class_subject_roll_map;
+        HashMap<String, ArrayList<mPair<String, ArrayList<String> >  > > class_subject_roll_map;
         private int querySuccess = -1;
 
         UserLoginTask(String username, String password) {
@@ -190,26 +191,36 @@ public class Authenticate extends ActionBarActivity {
 
             String url_authenticate = getResources().getString(R.string.authenticate_url);
             serverReplyData = (new JSONParser()).makeHttpRequest(url_authenticate, "POST", paramValues);
-            JSONArray json = serverReplyData.jsonArray;
             if (serverReplyData.httpStatusCode != 200)
                 return false;
+            JSONObject json = serverReplyData.jsonObject;
             publishProgress(50);
             // check for querySuccess tag
             try {
                 // check log cat from response
-                class_subject_roll_map = new HashMap<mPair<String, String>, ArrayList<String>>();
                 Log.d("Upload Response", json.toString());
-                querySuccess = json.getJSONObject(json.length() - 1).getInt("success");
+                class_subject_roll_map = new HashMap<String, ArrayList<mPair<String, ArrayList<String> >  > > ();
+                querySuccess = json.getInt("success");
                 if (querySuccess != 1)
                     return false;
-                for (int i = 0; i < json.length() - 1; ++i) {
-                    JSONObject row = json.getJSONObject(i);
-                    mPair<String, String> stringStringPair = mPair.of(row.getString("class"), row.getString("subject"));
-                    ArrayList<String> rollList = new ArrayList<String>();
-                    JSONArray rolls = row.getJSONArray("roll");
-                    for (int j = 0; j < rolls.length(); ++j)
-                        rollList.add(rolls.get(j).toString());
-                    class_subject_roll_map.put(stringStringPair, rollList);
+//{"2k12co":[{"subject":"CD","rolls":["2k12co01","2k12co02"]},{"subject":"DS","rolls":["2k12co01","2k12co02"]}],"2k12ece":[{"subject":"DSD","rolls":["2k12ece01","2k12ece02"]}],"0":{"success":1}}
+                JSONArray keys = json.names();
+                for (int i = 0; i < json.length(); ++i) {
+                    if(keys.getString(i).equals("success"))
+                        continue;
+
+                    String className = keys.getString(i);
+                    class_subject_roll_map.put(className, new ArrayList<mPair<String, ArrayList<String> >  > ());
+                    JSONArray classData = json.getJSONArray(className);
+                    for(int j = 0; j<classData.length(); ++j){
+                        JSONObject subRoll = classData.getJSONObject(j);
+                        String subject = subRoll.getString("subject");
+                        ArrayList<String> l = new ArrayList<String>();
+                        JSONArray rolls =subRoll.getJSONArray("rolls");
+                        for(int k = 0; k<rolls.length(); ++k)
+                            l.add(rolls.getString(k));
+                        class_subject_roll_map.get(className).add(mPair.of(subject, l));
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();

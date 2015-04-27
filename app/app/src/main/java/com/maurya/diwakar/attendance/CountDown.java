@@ -32,7 +32,7 @@ public class CountDown extends Activity {
     TextView rollNoTextView;
     int students;
     boolean[] attRecord;
-    int currentRollNo = 1;
+    int currentRollNo = 0;
     Vibrator vibrator;
     private Toast toast;
     ProgressBar progressBar;
@@ -41,7 +41,7 @@ public class CountDown extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_count_down);
 
-        roll_list = getIntent().getStringArrayListExtra("roll");
+        roll_list = getIntent().getStringArrayListExtra("roll_list");
         mUsername = getIntent().getStringExtra("username");
         subject_name = getIntent().getStringExtra("subject");
         class_name = getIntent().getStringExtra("class");
@@ -57,8 +57,10 @@ public class CountDown extends Activity {
         progressBar.setMax(students);
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-        toast = Toast.makeText(getApplicationContext(), currentRollNo + " Present", Toast.LENGTH_SHORT);
+        toast = Toast.makeText(getApplicationContext(), roll_list.get(currentRollNo) +  " Present", Toast.LENGTH_SHORT);
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
+
+        rollNoTextView.setText(roll_list.get(currentRollNo));
 
         ((Button) findViewById(R.id.cancel)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +83,6 @@ public class CountDown extends Activity {
             }
         });
     }
-
 
     @Override
     public boolean onTouchEvent(MotionEvent event){
@@ -116,26 +117,26 @@ public class CountDown extends Activity {
 
         @Override
         public boolean onSingleTapUp(MotionEvent event) {
-            attRecord[currentRollNo-1] = true;
+            attRecord[currentRollNo] = true;
             if(toast != null)
                 toast.cancel();
-            toast.setText(currentRollNo + " Present");
+            toast.setText(roll_list.get(currentRollNo) + " Present");
             //todo: toast not getting shown in 4.x
-            toast.show();//http://www.putlocker.ms/star-trek-into-darkness-full-movie-watch-online-free.html
-            progressBar.setProgress(currentRollNo);
+            toast.show();
+            progressBar.setProgress(currentRollNo + 1);
             ++currentRollNo;
-            rollNoTextView.setText(String.valueOf(currentRollNo));
-            if(currentRollNo%10 == 1)
-                vibrator.vibrate(200);
-            else
-                vibrator.vibrate(100);
-            if(currentRollNo == students+1)
+            if(currentRollNo == students)
             {
                 ((Button)findViewById(R.id.done)).setEnabled(true);
                 rollNoTextView.setText("Complete");
-                rollNoTextView.setTextSize(50);
                 mDetector = null;
-            }
+            }else
+                rollNoTextView.setText(roll_list.get(currentRollNo));
+
+            if (currentRollNo % 10 == 1)
+                vibrator.vibrate(200);
+            else
+                vibrator.vibrate(100);
             return true;
         }
 
@@ -146,25 +147,25 @@ public class CountDown extends Activity {
             if(Math.abs(event1.getX() - event2.getX()) < 75)
                 return false;
 
-            attRecord[currentRollNo-1] = false;
+            attRecord[currentRollNo] = false;
             if(toast != null)
                 toast.cancel();
-            toast.setText(currentRollNo + " Absent");
+            toast.setText(roll_list.get(currentRollNo) + " Absent");
             toast.show();
-            progressBar.setProgress(currentRollNo);
+            progressBar.setProgress(currentRollNo + 1);
             ++currentRollNo;
-            rollNoTextView.setText(String.valueOf(currentRollNo));
-            if(currentRollNo%10 == 1)
-                vibrator.vibrate(200);
-            else
-                vibrator.vibrate(100);
-            if(currentRollNo == students+1)
+            if(currentRollNo == students)
             {
                 ((Button)findViewById(R.id.done)).setEnabled(true);
                 rollNoTextView.setText("Complete");
-                rollNoTextView.setTextSize(50);
                 mDetector = null;
-            }
+            }else
+                rollNoTextView.setText(roll_list.get(currentRollNo));
+
+            if (currentRollNo % 10 == 1)
+                vibrator.vibrate(200);
+            else
+                vibrator.vibrate(100);
             return true;
         }
     }

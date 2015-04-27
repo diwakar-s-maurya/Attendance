@@ -35,12 +35,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="150sp"
+        android:textSize="40sp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="1"
         android:id="@+id/rollNo"
         android:layout_gravity="center_vertical"
-        android:onClick="rollNoClicked"
         android:layout_weight="100"
         android:gravity="center"
         android:singleLine="true" />

@@ -15,10 +15,12 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="upload_url">http://10.60.38.255/attendance/upload_attendance.php</string>
-    <string name="authenticate_url">http://10.60.38.255/attendance/authenticate.php</string>
-    <string name="title_activity_select_subject_class">Select_subject_class</string>
-    <string name="title_activity_count_down">CountDown</string>
+
+    <string name="title_activity_select_subject_class">Select subject class</string>
+    <string name="title_activity_count_down">Count Down</string>
     <string name="title_activity_final_edits">Final Edits</string>
+
+    <string name="upload_url">http://192.168.1.150/attendance/upload_attendance.php</string>
+    <string name="authenticate_url">http://192.168.1.150/attendance/authenticate.php</string>
 
 </resources>
