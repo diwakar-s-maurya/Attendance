@@ -1,12 +1,16 @@
+This directory contains the files required by the server to provide web interface which runs on web browser.
+
+The provides functionality of the app including the reporing and viewing of the attendance.
+
+There are two portals
+1. for faculty through which they login and mark attendance
+2. for viewing the attendance of students
+
+The reports can be printed in pdf file also.
+
+
+For UI beautification following has been used:
 Almost Flat UI
-=======
-
-When using the markup from the demo page, please update the Google Analytics Code to that of your own.
-
-Almost Flat UI is licensed under a MIT License. It uses Foundation Framework and is heavily inspired from Flat UI Free by designmodo.
-
-You are allowed to use these elements anywhere you want.
-
 ## Links:
 
 + [Demo page](http://websymphony.net/almost-flat-ui/)
